@@ -39,6 +39,7 @@ var (
 	DEBUG_MODE = false
 	SCAN_NUM   = 1000
 	PROXY_FILE = "iplist.txt"
+	TIMEOUT    = 5
 )
 
 type HttpProxyFunc func(ip string, port int, protocol string) (err error, isProxy bool, proxyInfo models.ProxyInfo)
@@ -57,6 +58,10 @@ func Scan(ctx *cli.Context) (err error) {
 
 	if DEBUG_MODE {
 		util.Log.Logger.Level = logrus.DebugLevel
+	}
+
+	if ctx.IsSet("timeout") {
+		TIMEOUT = ctx.Int("timeout")
 	}
 
 	if ctx.IsSet("scan_num") {

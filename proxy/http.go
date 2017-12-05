@@ -49,7 +49,7 @@ func CheckHttpProxy(ip string, port int, protocol string) (err error, isProxy bo
 	proxyUrl, err := url.Parse(rawProxyUrl)
 	if err == nil {
 		Transport := &http.Transport{Proxy: http.ProxyURL(proxyUrl)}
-		client := &http.Client{Transport: Transport, Timeout: time.Second * 10}
+		client := &http.Client{Transport: Transport, Timeout: time.Duration(TIMEOUT) * time.Second}
 		util.Log.Debugf("Checking proxy: %v", rawProxyUrl)
 		resp, err := client.Get(WebUrl)
 		if err == nil {

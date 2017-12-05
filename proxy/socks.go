@@ -26,12 +26,12 @@ package proxy
 
 import (
 	"net/http"
-	"time"
 	"h12.me/socks"
 
 	"proxy_scanner/models"
 	"proxy_scanner/util"
 	"fmt"
+	"time"
 )
 
 var (
@@ -49,7 +49,7 @@ func CheckSockProxy(ip string, port, protocol int) (err error, isProxy bool, pro
 	tr := &http.Transport{Dial: dialSocksProxy}
 	httpClient := &http.Client{
 		Transport: tr,
-		Timeout:   10 * time.Second}
+		Timeout:   time.Duration(TIMEOUT) * time.Second}
 	util.Log.Debugf("Checking proxy: %v", fmt.Sprintf("%v://%v:%v", SockProxyProtocol[protocol], ip, port))
 	resp, err := httpClient.Get(WebUrl)
 	if err == nil {

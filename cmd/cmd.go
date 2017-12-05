@@ -39,6 +39,7 @@ var Scan = cli.Command{
 	Flags: []cli.Flag{
 		boolFlag("debug, d", "debug mode"),
 		intFlag("scan_num, n", 1000, "scan num"),
+		intFlag("timeout, t", 5, "timeout"),
 		stringFlag("filename, f", "iplist.txt", "filename"),
 	},
 }
