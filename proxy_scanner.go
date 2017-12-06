@@ -19,7 +19,7 @@ func main() {
 	app.Author = "netxfly"
 	app.Email = "x@xsec.io"
 	app.Version = "20171205"
-	app.Usage = "A SOCK4/SOCK4a/SOCK5/HTTP/HTTPS proxy scanner"
+	app.Usage = "A SOCKS4/SOCKS4a/SOCKS5/HTTP/HTTPS proxy scanner"
 	app.Commands = []cli.Command{cmd.Scan, cmd.Dump}
 	app.Flags = append(app.Flags, cmd.Scan.Flags...)
 	app.Flags = append(app.Flags, cmd.Dump.Flags...)
