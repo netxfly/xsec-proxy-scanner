@@ -2,6 +2,5 @@
 test/
 *.txt
 *.db
-README.md
 doc/
 proxy_scanner
