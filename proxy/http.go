@@ -33,11 +33,13 @@ import (
 
 	"net/http"
 	"net/url"
+	"io/ioutil"
+	"strings"
 )
 
 var (
 	HttpProxyProtocol = []string{"http", "https"}
-	WebUrl            = "http://www.163.com"
+	WebUrl            = "http://email.163.com/"
 )
 
 func CheckHttpProxy(ip string, port int, protocol string) (err error, isProxy bool, proxyInfo models.ProxyInfo) {
@@ -53,8 +55,12 @@ func CheckHttpProxy(ip string, port int, protocol string) (err error, isProxy bo
 		util.Log.Debugf("Checking proxy: %v", rawProxyUrl)
 		resp, err := client.Get(WebUrl)
 		if err == nil {
-			if resp.StatusCode >= http.StatusOK {
-				isProxy = true
+			if resp.StatusCode == http.StatusOK {
+				body, err := ioutil.ReadAll(resp.Body)
+				if err == nil && strings.Contains(string(body), "网易免费邮箱") {
+					isProxy = true
+				}
+
 			}
 		}
 	}

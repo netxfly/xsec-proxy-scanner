@@ -25,13 +25,16 @@ THE SOFTWARE.
 package proxy
 
 import (
-	"net/http"
 	"h12.me/socks"
 
 	"proxy_scanner/models"
 	"proxy_scanner/util"
+
 	"fmt"
 	"time"
+	"net/http"
+	"io/ioutil"
+	"strings"
 )
 
 var (
@@ -53,8 +56,11 @@ func CheckSockProxy(ip string, port, protocol int) (err error, isProxy bool, pro
 	util.Log.Debugf("Checking proxy: %v", fmt.Sprintf("%v://%v:%v", SockProxyProtocol[protocol], ip, port))
 	resp, err := httpClient.Get(WebUrl)
 	if err == nil {
-		if resp.StatusCode >= http.StatusOK {
-			isProxy = true
+		if resp.StatusCode == http.StatusOK {
+			body, err := ioutil.ReadAll(resp.Body)
+			if err == nil && strings.Contains(string(body), "网易免费邮箱") {
+				isProxy = true
+			}
 		}
 	}
 	return err, isProxy, proxyInfo
