@@ -58,3 +58,5 @@ GLOBAL OPTIONS:
 ![](https://docs.xsec.io/images/xsec_proxy_scanner.png)
 
 从上图中看出，timeout参数调得过短会存在漏报现象，需要根据网络情况合理调整timeout参数。
+
+编译好的二进制版本下载地址[https://github.com/netxfly/xsec-proxy-scanner/releases](https://github.com/netxfly/xsec-proxy-scanner/releases)
